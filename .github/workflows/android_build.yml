@@ -61,20 +61,21 @@ jobs:
         run: |
           if [ -f "android/key.properties" ]; then
             flutter build apk --release
-            mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/mpay-plus-release.apk
           else
             flutter build apk --debug
-            mv build/app/outputs/flutter-apk/app-debug.apk build/app/outputs/flutter-apk/mpay-plus-debug.apk
           fi
           
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: build/app/outputs/flutter-apk/mpay-plus-*.apk
-          tag_name: v${{ github.run_number }}
-          name: Build ${{ github.run_number }}
-          body: Automatic build from GitHub Actions
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create release directory
+        run: mkdir -p release
+          
+      - name: Copy APK to release directory
+        run: |
+          cp build/app/outputs/flutter-apk/*.apk release/
+          
+      - name: Commit and push APK
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add release/*.apk
+          git commit -m "Add built APK [skip ci]" || echo "No changes to commit"
+          git push
