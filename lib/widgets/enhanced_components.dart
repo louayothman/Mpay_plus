@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mpay_integrated/theme/enhanced_theme.dart';
-import 'package:mpay_integrated/widgets/animated_buttons.dart';
-import 'package:mpay_integrated/widgets/interactive_containers.dart';
-import 'package:mpay_integrated/widgets/motion_effects.dart';
-import 'package:mpay_integrated/widgets/animated_transitions.dart';
-import 'package:mpay_integrated/widgets/modern_containers.dart';
+import 'package:mpay_app/theme/enhanced_theme.dart';
+import 'package:mpay_app/widgets/animated_buttons.dart';
+import 'package:mpay_app/widgets/interactive_containers.dart';
+import 'package:mpay_app/widgets/motion_effects.dart';
+import 'package:mpay_app/widgets/animated_transitions.dart';
+import 'package:mpay_app/widgets/modern_containers.dart';
 
 class PerformanceOptimizer {
   // تحسين أداء التطبيق من خلال تقليل عمليات إعادة البناء غير الضرورية
