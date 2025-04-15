@@ -18,19 +18,19 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-      
+          
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.10.0'
           channel: 'stable'
-      
+          
       - name: Get dependencies
         run: flutter pub get
-      
+        
       - name: Create keystore directory
         run: mkdir -p android/app/keystore
-      
+        
       - name: Decode Keystore
         env:
           ENCODED_KEYSTORE: ${{ secrets.KEYSTORE_BASE64 }}
@@ -40,7 +40,7 @@ jobs:
           else
             echo "No keystore found, building debug version"
           fi
-      
+          
       - name: Create key.properties
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -56,7 +56,7 @@ jobs:
           else
             echo "Missing keystore secrets, building debug version"
           fi
-      
+          
       - name: Build APK
         run: |
           if [ -f "android/key.properties" ]; then
@@ -64,10 +64,19 @@ jobs:
           else
             flutter build apk --debug
           fi
-      
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
+          
+      - name: Create artifacts directory
+        run: mkdir -p $GITHUB_WORKSPACE/artifacts
+          
+      - name: Copy APK to artifacts directory
+        run: |
+          cp build/app/outputs/flutter-apk/*.apk $GITHUB_WORKSPACE/artifacts/
+          
+      - name: List artifacts
+        run: ls -la $GITHUB_WORKSPACE/artifacts/
+          
+      - name: Upload artifacts to GitHub
+        uses: actions/upload-artifact@v1
         with:
-          name: mpay-plus-release
-          path: build/app/outputs/flutter-apk/*.apk
-          if-no-files-found: warn
+          name: mpay-plus-apk
+          path: artifacts
