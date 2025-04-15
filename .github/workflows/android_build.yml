@@ -61,22 +61,20 @@ jobs:
         run: |
           if [ -f "android/key.properties" ]; then
             flutter build apk --release
+            mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/mpay-plus-release.apk
           else
             flutter build apk --debug
+            mv build/app/outputs/flutter-apk/app-debug.apk build/app/outputs/flutter-apk/mpay-plus-debug.apk
           fi
           
-      - name: Create artifacts directory
-        run: mkdir -p $GITHUB_WORKSPACE/artifacts
-          
-      - name: Copy APK to artifacts directory
-        run: |
-          cp build/app/outputs/flutter-apk/*.apk $GITHUB_WORKSPACE/artifacts/
-          
-      - name: List artifacts
-        run: ls -la $GITHUB_WORKSPACE/artifacts/
-          
-      - name: Upload artifacts to GitHub
-        uses: actions/upload-artifact@v1
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: mpay-plus-apk
-          path: artifacts
+          files: build/app/outputs/flutter-apk/mpay-plus-*.apk
+          tag_name: v${{ github.run_number }}
+          name: Build ${{ github.run_number }}
+          body: Automatic build from GitHub Actions
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
