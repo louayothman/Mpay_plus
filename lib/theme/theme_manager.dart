@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mpay_clean/theme/enhanced_theme.dart';
+import 'package:mpay_app/theme/enhanced_theme.dart';
 
 class ThemeManager {
   // تحسين الوضع الليلي
