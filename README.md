@@ -104,11 +104,6 @@ The application follows a modular architecture with clear separation of concerns
 - `lib/utils/` - Utility classes
 - `lib/widgets/` - Reusable UI components
 
-## Admin Access
-To access admin features, use the following credentials:
-- Email: admin@mpay.com
-- Password: Admin@123456
-- PIN: 1234
 
 ## Compatibility
 - Android versions: 8.0 - 15.0
