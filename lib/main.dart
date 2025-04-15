@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mpay_clean/theme/enhanced_theme.dart';
-import 'package:mpay_clean/widgets/enhanced_components.dart';
-import 'package:mpay_clean/screens/splash/splash_screen.dart';
+import 'package:mpay_app/theme/enhanced_theme.dart';
+import 'package:mpay_app/widgets/enhanced_components.dart';
+import 'package:mpay_app/screens/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
