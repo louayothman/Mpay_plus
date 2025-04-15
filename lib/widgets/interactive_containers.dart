@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter/gestures.dart';
 
 class InteractiveCard extends StatefulWidget {
   final Widget child;
