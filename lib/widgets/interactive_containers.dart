@@ -307,7 +307,7 @@ class WavePainter extends CustomPainter {
       drawWave(
         canvas, 
         size, 
-        paint.copyWith(color: color.withOpacity(waveOpacity)), 
+        paint.color = color.withOpacity(waveOpacity); 
         adjustedAmplitude, 
         adjustedFrequency, 
         adjustedPhase + (animationValue * 2 * math.pi)
