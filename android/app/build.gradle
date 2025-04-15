@@ -5,6 +5,10 @@ plugins {
     id "com.google.gms.google-services"  // Google Services plugin
 }
 
+// تعريف افتراضي لقيم الإصدار (قابل للتعديل من GitHub Actions أو محلياً)
+def flutterVersionCode = project.hasProperty("flutterVersionCode") ? project.getProperty("flutterVersionCode") : "1"
+def flutterVersionName = project.hasProperty("flutterVersionName") ? project.getProperty("flutterVersionName") : "1.0.0"
+
 android {
     namespace "com.mpay.android"
     compileSdkVersion flutter.compileSdkVersion
@@ -24,10 +28,7 @@ android {
     }
 
     defaultConfig {
-        // Application ID specified to match Firebase configuration
         applicationId "com.mpay.android"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -36,9 +37,11 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // للتجربة، توقيع افتراضي. عند التوزيع الفعلي استخدم key حقيقي
             signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
