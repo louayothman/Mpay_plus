@@ -119,13 +119,13 @@ class NeumorphicContainer extends StatelessWidget {
             color: shadowColor,
             offset: Offset(depth / 2, depth / 2),
             blurRadius: depth,
-            inset: true,
+            // inset: true,
           ),
           BoxShadow(
             color: lightColor,
             offset: Offset(-depth / 2, -depth / 2),
             blurRadius: depth,
-            inset: true,
+            // inset: true,
           ),
         ] : [
           BoxShadow(
