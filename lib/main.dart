@@ -76,20 +76,28 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildWelcomeSection(BuildContext context) {
-    return GlassmorphicContainer(
+    return Container(
       width: double.infinity,
       height: 180,
-      borderRadius: EnhancedTheme.largeBorderRadius,
-      blur: 10,
-      opacity: 0.1,
-      borderColor: Colors.white.withOpacity(0.5),
-      gradient: LinearGradient(
-        colors: [
-          EnhancedTheme.primaryColor.withOpacity(0.3),
-          EnhancedTheme.accentColor.withOpacity(0.3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(EnhancedTheme.largeBorderRadius),
+        gradient: LinearGradient(
+          colors: [
+            EnhancedTheme.primaryColor.withOpacity(0.3),
+            EnhancedTheme.accentColor.withOpacity(0.3),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.5),
+        ),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            color: Colors.black.withOpacity(0.1),
+          ),
         ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
       ),
       child: Padding(
         padding: EdgeInsets.all(EnhancedTheme.mediumPadding),
@@ -119,22 +127,19 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: EnhancedTheme.smallSpacing),
-            AnimatedCounter(
-              end: 12500,
-              prefix: '\$',
+            Text(
+              '\$12,500',
               style: EnhancedTheme.headlineStyle.copyWith(
                 fontSize: 28,
                 color: EnhancedTheme.primaryColor,
               ),
-              includeCommas: true,
             ),
             SizedBox(height: EnhancedTheme.mediumSpacing),
-            EnhancedProgressIndicator(
+            LinearProgressIndicator(
               value: 0.7,
-              height: 8,
-              showPercentage: false,
               backgroundColor: EnhancedTheme.primaryColor.withOpacity(0.2),
-              foregroundColor: EnhancedTheme.primaryColor,
+              color: EnhancedTheme.primaryColor,
+              minHeight: 8,
             ),
           ],
         ),
@@ -199,12 +204,19 @@ class HomePage extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          NeumorphicContainer(
+          Container(
             width: 60,
             height: 60,
-            borderRadius: EnhancedTheme.mediumBorderRadius,
-            color: Colors.white,
-            style: NeumorphicStyle.convex,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(EnhancedTheme.mediumBorderRadius),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
             child: Icon(
               icon,
               color: color,
@@ -277,12 +289,8 @@ class HomePage extends StatelessWidget {
     required String amount,
     required bool isDebit,
   }) {
-    return InteractiveCard(
-      height: 80,
-      backgroundColor: Colors.white,
-      enableTilt: false,
-      enableHoverScale: true,
-      onTap: () {},
+    return Card(
+      elevation: 2,
       child: Padding(
         padding: EdgeInsets.all(EnhancedTheme.mediumPadding),
         child: Row(
@@ -380,55 +388,25 @@ class HomePage extends StatelessWidget {
     required String description,
     required Color color,
   }) {
-    return GradientBorderContainer(
-      width: 250,
-      height: 180,
-      gradient: LinearGradient(
-        colors: [
-          color,
-          color.withOpacity(0.7),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      backgroundColor: Colors.white,
+    return Card(
+      elevation: 5,
+      color: color.withOpacity(0.1),
       child: Padding(
         padding: EdgeInsets.all(EnhancedTheme.mediumPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ShimmerEffect(
-              baseColor: color.withOpacity(0.5),
-              highlightColor: color,
-              child: Icon(
-                Icons.card_giftcard,
-                size: 40,
-                color: color,
-              ),
-            ),
-            SizedBox(height: EnhancedTheme.mediumSpacing),
             Text(
               title,
-              style: EnhancedTheme.titleStyle.copyWith(
+              style: EnhancedTheme.bodyStyle.copyWith(
+                fontWeight: FontWeight.bold,
                 color: color,
               ),
             ),
             SizedBox(height: EnhancedTheme.smallSpacing),
             Text(
               description,
-              style: EnhancedTheme.bodyStyle,
-            ),
-            Spacer(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: EnhancedButton(
-                text: 'المزيد',
-                onPressed: () {},
-                backgroundColor: color,
-                width: 100,
-                height: 40,
-                animationType: AnimationType.scale,
-              ),
+              style: EnhancedTheme.bodyStyle.copyWith(color: Colors.black),
             ),
           ],
         ),
